@@ -205,6 +205,70 @@ parts:
       - usr/bin/gamemoderun
       - usr/lib/*/libgamemode*.so.*
 
+  wayland:
+    after: [ meson-deps ]
+    source: https://gitlab.freedesktop.org/wayland/wayland.git
+    source-tag: '1.21.0'
+    source-depth: 1
+    plugin: meson
+    meson-parameters:
+      - --prefix=/usr
+      - -Doptimization=3
+      - -Ddebug=true
+      - -Ddocumentation=false
+    build-packages:
+      - libexpat1-dev
+      - libxml2-dev
+      - wayland-protocols
+      - libxkbcommon-dev
+
+  gamescope:
+    after: [ wayland, meson-deps ]
+    source: https://github.com/Plagman/gamescope.git
+    plugin: meson
+    organize:
+      snap/steam/current/usr: usr
+    meson-parameters:
+      - --prefix=/usr
+    build-packages:
+      - libx11-dev
+      - libxdamage-dev
+      - libxcomposite-dev
+      - libxrender-dev
+      - libxxf86vm-dev
+      - libxtst-dev
+      - libxres-dev
+      - libdrm-dev
+      - libvulkan-dev
+      #- libwayland-dev
+      - libcap-dev
+      - libsdl2-dev
+      - libpixman-1-dev
+      - libinput-dev
+      - libseat-dev
+      - xwayland
+      - libxcb-composite0-dev
+      - libxcb-icccm4-dev
+      - libxcb-res0-dev
+      - glslang-tools
+    stage-packages:
+      - libxres-dev
+      - libsdl2-2.0-0
+      - libinput-tools
+      - libseat-dev
+      - libxtst-dev
+      - libdrm-dev
+      - xwayland
+      - libx11-dev
+    # override-prime: |
+    #   craftctl default
+    #   cp usr/local/bin/gamescope usr/bin/gamescope
+    stage:
+      - -usr/lib/x86_64-linux-gnu/libwayland-client.so.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-egl.so.1
+      - -usr/lib/x86_64-linux-gnu/libwayland-server.so.0
+
   steam-devices:
     plugin: dump
     source: https://github.com/ValveSoftware/steam-devices.git
@@ -256,6 +320,11 @@ parts:
       ln -s ../../steam.png $CRAFT_PART_INSTALL/meta/gui/icon.png
       # Install the desktop file, with the icon field munged
       sed 's|Icon=steam|Icon=${SNAP}/steam.png|g' $CRAFT_PART_INSTALL/usr/share/applications/steam.desktop > $CRAFT_PART_INSTALL/steam.desktop
+    stage:
+      - -usr/lib/x86_64-linux-gnu/libwayland-client.so.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-egl.so.1
+      - -usr/lib/x86_64-linux-gnu/libwayland-server.so.0
     prime:
       - -etc/fonts
       - -usr/share/doc
