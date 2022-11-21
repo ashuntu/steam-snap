@@ -216,18 +216,22 @@ parts:
       - -Doptimization=3
       - -Ddebug=true
       - -Ddocumentation=false
+      - -Dwlroots:xwayland=disabled
     build-packages:
       - libexpat1-dev
       - libxml2-dev
       - wayland-protocols
       - libxkbcommon-dev
+    stage:
+      - -usr/lib/x86_64-linux-gnu/libwayland-client.so.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-egl.so.1
+      - -usr/lib/x86_64-linux-gnu/libwayland-server.so.0
 
   gamescope:
     after: [ wayland, meson-deps ]
     source: https://github.com/Plagman/gamescope.git
     plugin: meson
-    organize:
-      snap/steam/current/usr: usr
     meson-parameters:
       - --prefix=/usr
     build-packages:
@@ -246,23 +250,20 @@ parts:
       - libpixman-1-dev
       - libinput-dev
       - libseat-dev
-      - xwayland
       - libxcb-composite0-dev
       - libxcb-icccm4-dev
       - libxcb-res0-dev
       - glslang-tools
     stage-packages:
-      - libxres-dev
+      - libxres1
       - libsdl2-2.0-0
       - libinput-tools
-      - libseat-dev
-      - libxtst-dev
+      - libseat1
+      - libxtst6
       - libdrm-dev
+      - libx11-6
+      - wayland-protocols
       - xwayland
-      - libx11-dev
-    # override-prime: |
-    #   craftctl default
-    #   cp usr/local/bin/gamescope usr/bin/gamescope
     stage:
       - -usr/lib/x86_64-linux-gnu/libwayland-client.so.0
       - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0
@@ -320,11 +321,6 @@ parts:
       ln -s ../../steam.png $CRAFT_PART_INSTALL/meta/gui/icon.png
       # Install the desktop file, with the icon field munged
       sed 's|Icon=steam|Icon=${SNAP}/steam.png|g' $CRAFT_PART_INSTALL/usr/share/applications/steam.desktop > $CRAFT_PART_INSTALL/steam.desktop
-    stage:
-      - -usr/lib/x86_64-linux-gnu/libwayland-client.so.0
-      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0
-      - -usr/lib/x86_64-linux-gnu/libwayland-egl.so.1
-      - -usr/lib/x86_64-linux-gnu/libwayland-server.so.0
     prime:
       - -etc/fonts
       - -usr/share/doc
@@ -351,6 +347,7 @@ apps:
       TMPDIR: $XDG_RUNTIME_DIR
       ALWAYS_USE_PULSEAUDIO: 1
       DISABLE_WAYLAND: 1
+      WLR_XWAYLAND: $SNAP/usr/bin/Xwayland
     plugs:
       - shmem
       - desktop
