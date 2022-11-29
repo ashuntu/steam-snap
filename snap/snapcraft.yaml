@@ -72,6 +72,10 @@ layout:
   /etc/ld.so.cache:
     bind-file: $SNAP_DATA/etc/ld.so.cache
 
+slots:
+  x11-gamescope:
+    interface: x11
+
 plugs:
   gtk-3-themes:
     interface: content
@@ -231,6 +235,7 @@ parts:
   gamescope:
     after: [ wayland, meson-deps ]
     source: https://github.com/Plagman/gamescope.git
+    source-tag: '3.11.49'
     plugin: meson
     meson-parameters:
       - --prefix=/usr
@@ -244,7 +249,6 @@ parts:
       - libxres-dev
       - libdrm-dev
       - libvulkan-dev
-      #- libwayland-dev
       - libcap-dev
       - libsdl2-dev
       - libpixman-1-dev
