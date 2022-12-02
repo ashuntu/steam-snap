@@ -226,6 +226,11 @@ parts:
       - dpkg-dev
       - dirmngr # Needed for launchpad builds
     stage-packages:
+      # Steam's bwrap uses `unprivileged_userns_clone` which it can't access in the Snap,
+      # this uses the `setuid-root` version which Steam should fall back to if it's present
+      # See:
+      # https://github.com/ValveSoftware/steam-runtime/issues/297
+      - bubblewrap
       - steam-launcher
       - steam-libs-amd64
       - steam-libs-i386
