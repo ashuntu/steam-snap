@@ -295,6 +295,7 @@ apps:
       DISABLE_WAYLAND: 1
     plugs:
       - shmem
+      - browser-support
       - desktop
       - desktop-legacy
       - wayland
