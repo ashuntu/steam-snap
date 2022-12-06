@@ -316,6 +316,7 @@ apps:
       - fuse-support
       - steam-support
       - removable-media
+      - raw-usb
   report:
     command: bin/steamreport
     plugs:
