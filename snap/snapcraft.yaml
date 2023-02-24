@@ -231,6 +231,17 @@ parts:
       mkdir -p $CRAFT_PART_INSTALL/tests
       cp -rp * $CRAFT_PART_INSTALL/tests/
 
+  steam-tweaks:
+    plugin: nil
+    source: https://github.com/ashuntu/steam-tweaks.git
+    override-build: |
+      set -eux
+      flutter doctor
+      flutter pub get
+      flutter build linux
+      mkdir -p $CRAFT_PART_INSTALL/bin
+      cp -r build/linux/*/release/bundle/* $CRAFT_PART_INSTALL/bin
+
   steam-devices:
     plugin: dump
     source: https://github.com/ValveSoftware/steam-devices.git
