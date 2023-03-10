@@ -47,6 +47,11 @@ REALHOME=$(getent passwd $UID | cut -d ':' -f 6)
 
 export SNAP_DESKTOP_RUNTIME=$SNAP
 
+# Enable Steam Play (Proton) for unsupported titles by default
+if [ -d $SNAP_USER_COMMON/.steam/steam ]; then
+  $SNAP_DESKTOP_RUNTIME/bin/proton
+fi
+
 # Set config folder to local path
 export XDG_CONFIG_HOME="$SNAP_USER_COMMON/.config"
 ensure_dir_exists "$XDG_CONFIG_HOME"

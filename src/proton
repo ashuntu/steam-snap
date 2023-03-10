@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+
+from os import environ
+import os
+import vdf
+
+# Enables Steam Play (Proton) for unsupported titles
+
+DEFAULT_PROTON = "proton_experimental"
+FILE_PATH = os.path.join(os.environ["SNAP_USER_COMMON"], ".steam/steam/config/config.vdf")
+
+d = vdf.load(open(FILE_PATH, "r"))
+d.setdefault("InstallConfigStore", {})\
+    .setdefault("Software", {})\
+    .setdefault("Valve", {})\
+    .setdefault("Steam", {})\
+    .setdefault("CompatToolMapping", {})\
+    .setdefault("0", {})
+d["InstallConfigStore"]["Software"]["Valve"]["Steam"]["CompatToolMapping"]["0"] = {
+    "name": DEFAULT_PROTON,
+    "config": "",
+    "priority": "75",
+}
+vdf.dump(d, open(FILE_PATH, "w"), pretty=True)
