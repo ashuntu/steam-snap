@@ -74,6 +74,9 @@ layout:
     symlink: $SNAP/graphics/usr/lib/x86_64-linux-gnu/libxcb.so.1.1.0
   /etc/ld.so.cache:
     bind-file: $SNAP_DATA/etc/ld.so.cache
+  # Put ms fonts in canonical locations
+  /usr/share/fonts/truetype/msttcorefonts:
+    bind: $SNAP/usr/share/fonts/truetype/msttcorefonts
 
 plugs:
   gaming-mesa:
@@ -325,6 +328,17 @@ parts:
       find . -type f,l -exec rm -f $CRAFT_PRIME/usr/lib/{} \;
       cd /snap/gaming-graphics-core22/current/usr/share
       find . -type f,l -exec rm -f $CRAFT_PRIME/usr/share/{} \;
+  
+  # These are the actual fonts Steam wants, will prevent any font fallback issues
+  ms-fonts:
+    plugin: nil
+    stage-packages: [ttf-mscorefonts-installer]
+    override-pull: |
+      echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections
+      craftctl default
+    override-stage: |
+      craftctl default
+      cp -r /usr/share/fonts/truetype/msttcorefonts $SNAPCRAFT_STAGE/usr/share/fonts/truetype/msttcorefonts
 
 apps:
   steam:
