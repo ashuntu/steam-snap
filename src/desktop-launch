@@ -153,28 +153,21 @@ export XLOCALEDIR="$SNAP_DESKTOP_RUNTIME/usr/share/X11/locale"
 export XCURSOR_PATH="$SNAP_DESKTOP_RUNTIME/usr/share/icons"
 prepend_dir XCURSOR_PATH "$SNAP/share/icons"
 
-# Mesa Libs for OpenGL support
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/i386-linux-gnu/mesa"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/i386-linux-gnu/mesa-egl"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/x86_64-linux-gnu/mesa"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/x86_64-linux-gnu/mesa-egl"
-# append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/mesa"
-# append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/mesa-egl"
-# append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/mesa"
-# append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/mesa-egl"
+#### Setting up graphics content snap paths
 
+# Mesa Libs for OpenGL support
+append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/mesa"
+append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/mesa-egl"
+append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/mesa"
+append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/mesa-egl"
 append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu"
 append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu"
 
 # Tell libGL and libva where to find the drivers
-export LIBGL_DRIVERS_PATH="$SNAP_DESKTOP_RUNTIME/usr/lib/i386-linux-gnu/dri"
-append_dir LIBGL_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/x86_64-linux-gnu/dri"
-append_dir LIBGL_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/dri"
+export LIBGL_DRIVERS_PATH="$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/dri"
 append_dir LIBGL_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/dri"
 append_dir LD_LIBRARY_PATH "$LIBGL_DRIVERS_PATH"
 
-append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/i386-linux-gnu/dri"
-append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/usr/lib/x86_64-linux-gnu/dri"
 append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/dri"
 append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/dri"
 
