@@ -166,13 +166,12 @@ append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-
 # Tell libGL and libva where to find the drivers
 export LIBGL_DRIVERS_PATH="$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/dri"
 append_dir LIBGL_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/dri"
-append_dir LD_LIBRARY_PATH "$LIBGL_DRIVERS_PATH"
 
 append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/dri"
 append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/dri"
 
 # Set where the VDPAU drivers are located
-export VDPAU_DRIVER_PATH="/usr/lib/i386-linux-gnu/vdpau/"
+export VDPAU_DRIVER_PATH="$SNAP/graphics/usr/lib/i386-linux-gnu/vdpau/"
 if [ -e "/var/lib/snapd/lib/gl/vdpau/libvdpau_nvidia.so" ]; then
   export VDPAU_DRIVER_PATH="/var/lib/snapd/lib/gl/vdpau"
   # Prevent picking VA-API (Intel/AMD) over NVIDIA VDPAU; on PRIME systems for example
