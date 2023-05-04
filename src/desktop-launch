@@ -155,27 +155,29 @@ prepend_dir XCURSOR_PATH "$SNAP/share/icons"
 
 #### Setting up graphics content snap paths
 
+GRAPHICS_CORE_LIB="$SNAP_DESKTOP_RUNTIME/graphics/usr/lib"
+
 # Mesa Libs for OpenGL support
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/mesa"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/mesa-egl"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/mesa"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/mesa-egl"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu"
-append_dir LD_LIBRARY_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu"
+append_dir LD_LIBRARY_PATH "$GRAPHICS_CORE_LIB/i386-linux-gnu/mesa"
+append_dir LD_LIBRARY_PATH "$GRAPHICS_CORE_LIB/i386-linux-gnu/mesa-egl"
+append_dir LD_LIBRARY_PATH "$GRAPHICS_CORE_LIB/x86_64-linux-gnu/mesa"
+append_dir LD_LIBRARY_PATH "$GRAPHICS_CORE_LIB/x86_64-linux-gnu/mesa-egl"
+append_dir LD_LIBRARY_PATH "$GRAPHICS_CORE_LIB/i386-linux-gnu"
+append_dir LD_LIBRARY_PATH "$GRAPHICS_CORE_LIB/x86_64-linux-gnu"
 
 # Tell libGL and libva where to find the drivers
-export LIBGL_DRIVERS_PATH="$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/dri"
-append_dir LIBGL_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/dri"
+export LIBGL_DRIVERS_PATH="$GRAPHICS_CORE_LIB/i386-linux-gnu/dri"
+append_dir LIBGL_DRIVERS_PATH "$GRAPHICS_CORE_LIB/x86_64-linux-gnu/dri"
 
 # EGL vendor files on glvnd enabled systems
 prepend_dir __EGL_VENDOR_LIBRARY_DIRS "/var/lib/snapd/lib/glvnd/egl_vendor.d"
 append_dir __EGL_VENDOR_LIBRARY_DIRS "$SNAP_DESKTOP_RUNTIME/graphics/usr/share/glvnd/egl_vendor.d"
 
-append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/i386-linux-gnu/dri"
-append_dir LIBVA_DRIVERS_PATH "$SNAP_DESKTOP_RUNTIME/graphics/usr/lib/x86_64-linux-gnu/dri"
+append_dir LIBVA_DRIVERS_PATH "$GRAPHICS_CORE_LIB/i386-linux-gnu/dri"
+append_dir LIBVA_DRIVERS_PATH "$GRAPHICS_CORE_LIB/x86_64-linux-gnu/dri"
 
 # Set where the VDPAU drivers are located
-export VDPAU_DRIVER_PATH="$SNAP/graphics/usr/lib/i386-linux-gnu/vdpau/"
+export VDPAU_DRIVER_PATH="$GRAPHICS_CORE_LIB/i386-linux-gnu/vdpau/"
 if [ -e "/var/lib/snapd/lib/gl/vdpau/libvdpau_nvidia.so" ]; then
   export VDPAU_DRIVER_PATH="/var/lib/snapd/lib/gl/vdpau"
   # Prevent picking VA-API (Intel/AMD) over NVIDIA VDPAU; on PRIME systems for example
