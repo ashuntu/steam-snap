@@ -326,6 +326,17 @@ wait_for_async_execs
 ensure_dir_exists "$XDG_DATA_HOME/Steam/skins"
 cp -rp $SNAP/usr/share/Steam/skins/Yaru $XDG_DATA_HOME/Steam/skins/
 
+### Workaround for issue with nvidia vaapi drivers on 525
+nvidia_driver_ver="$(nvidia-smi --query-gpu=driver_version --format=csv,noheader)"
+nvidia_major_ver=$(cut -d '.' -f 1 <<< "${nvidia_driver_ver}")
+
+echo "detected nvidia ver ${nvidia_major_ver}"
+
+if [ ${nvidia_major_ver} = 525 ]; then
+  echo "using nvidia 525.xx drivers - setting workaround for VA API drivers"
+  export NVIDIA_BACKEND=direct
+fi
+
 if [ -n "$SNAP_DESKTOP_DEBUG" ]; then
   echo "desktop-launch elapsed time: $(date +%s.%N --date="$START seconds ago")"
   echo "Now running: exec $*"

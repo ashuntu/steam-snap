@@ -186,10 +186,12 @@ parts:
     plugin: nil
     stage-packages:
       - jq
+      - nvidia-utils-525 # choice of 525 is arbitrary, we just use this to query the GPU for driver versioning
     prime:
       - usr/bin/jq
       - usr/lib/*/libjq.so*
       - usr/lib/*/libonig.so*
+      - usr/bin/nvidia-smi
 
   tests:
     plugin: dump
