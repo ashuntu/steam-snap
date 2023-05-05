@@ -58,7 +58,7 @@ plugs:
   gaming-mesa:
     interface: content
     target: $SNAP/graphics
-    default-provider: gaming-graphics-core22
+    default-provider: mesa-core22
   gtk-3-themes:
     interface: content
     target: $SNAP/share/themes
@@ -292,12 +292,12 @@ parts:
     after: [steam]
     plugin: nil
     build-snaps:
-      - gaming-graphics-core22/kisak-fresh/candidate
+      - mesa-core22
     override-prime: |
       set -eux
-      cd /snap/gaming-graphics-core22/current/usr/lib
+      cd /snap/mesa-core22/current/usr/lib
       find . -type f,l -exec rm -f $CRAFT_PRIME/usr/lib/{} \;
-      cd /snap/gaming-graphics-core22/current/usr/share
+      cd /snap/mesa-core22/current/usr/share
       find . -type f,l -exec rm -f $CRAFT_PRIME/usr/share/{} \;
 
 
