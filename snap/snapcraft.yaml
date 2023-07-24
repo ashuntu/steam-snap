@@ -104,13 +104,9 @@ plugs:
   shmem:
     interface: shared-memory
     private: true
-  nvidia-driver-profiles:
+  usr-share-nvidia:
     interface: system-files
-    read:
-      - /usr/share/nvidia/nvidia-application-profiles-535.54.03-key-documentation
-      - /usr/share/nvidia/nvidia-application-profiles-535.54.03-key-rc
-      - /usr/share/nvidia/nvoptix.bin
-
+    read: [/usr/share/nvidia]
 hooks:
   configure:
     plugs:
@@ -405,7 +401,7 @@ apps:
       - joystick
       - network
       - network-bind
-      - nvidia-driver-profiles
+      - usr-share-nvidia
       - opengl
       - audio-playback
       - audio-record
