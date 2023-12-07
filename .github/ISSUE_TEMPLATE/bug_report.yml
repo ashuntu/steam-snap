@@ -50,9 +50,8 @@ body:
   attributes:
     label: Environment
     description: |
-      Output of running `snap run steam.report`. More info on this command [here](https://github.com/canonical/steam-snap/wiki/Troubleshooting#submitting-a-steam-report).
+      Run `snap run steam.report` in a terminal or right-click Steam and choose "report", paste the output here. More info on this command [here](https://github.com/canonical/steam-snap/wiki/Troubleshooting#submitting-a-steam-report).
     placeholder: |
-      # Run `snap run steam.report` in a terminal or right-click Steam and choose "report"
       os_release:
           name:
           version:
