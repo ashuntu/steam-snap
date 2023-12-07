@@ -5,7 +5,7 @@ labels: [type/bug]
 body:
 - type: checkboxes
   attributes:
-    label: Ensure there isn't an existing issue for this and check the wiki.
+    label: Ensure there isn't an existing issue for this and check the wiki
     description: |
       Please search to see if an issue already exists for the bug you encountered: https://github.com/canonical/steam-snap/issues?q=label%3Atype%2Fbug.
 
@@ -50,7 +50,7 @@ body:
   attributes:
     label: Environment
     description: |
-      Run `snap run steam.report` in a terminal or right-click Steam and choose "report", paste the output here. More info on this command [here](https://github.com/canonical/steam-snap/wiki/Troubleshooting#submitting-a-steam-report).
+      Run `snap run steam.report` in a terminal or right-click Steam and choose "Report", then paste the output here. More info on this command [here](https://github.com/canonical/steam-snap/wiki/Troubleshooting#submitting-a-steam-report).
     placeholder: |
       os_release:
           name:
