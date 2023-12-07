@@ -5,7 +5,7 @@ labels: [type/bug]
 body:
 - type: checkboxes
   attributes:
-    label: There isn't an existing issue for this and I have checked the wiki.
+    label: Ensure there isn't an existing issue for this and check the wiki.
     description: |
       Please search to see if an issue already exists for the bug you encountered: https://github.com/canonical/steam-snap/issues?q=label%3Abug.
 
@@ -13,7 +13,7 @@ body:
 
       If you are able, it is helpful to include if the problem occurs on the deb version of Steam or not as well.
     options:
-    - label: I have searched the existing issues
+    - label: This issue is not a duplicate and I have checked the wiki.
       required: true
 - type: textarea
   attributes:
