@@ -1,32 +1,20 @@
 name: Bug Report
 description: Create an issue about a problem with the Snap
 title: "<title>"
-labels: [bug]
+labels: [type/bug]
 body:
 - type: checkboxes
   attributes:
-    label: Is there an existing issue for this?
+    label: There isn't an existing issue for this and I have checked the wiki.
     description: |
       Please search to see if an issue already exists for the bug you encountered: https://github.com/canonical/steam-snap/issues?q=label%3Abug.
+
+      Be sure to check the [wiki](https://github.com/canonical/steam-snap/wiki) to see if your issue is addressed.
+
+      If you are able, it is helpful to include if the problem occurs on the deb version of Steam or not as well.
     options:
     - label: I have searched the existing issues
       required: true
-- type: checkboxes
-  attributes:
-    label: Have you checked the wiki for solutions?
-    description: |
-      Please check the wiki to see if your issue is addressed: https://github.com/canonical/steam-snap/wiki. If you do any troubleshooting from the wiki, please include it in the final section of this report.
-    options:
-    - label: I have searched the wiki
-      required: true
-- type: checkboxes
-  attributes:
-    label: Is this a Steam Snap-specific issue?
-    description: |
-      Please make sure your issue is exclusive to the Steam Snap and doesn't occur in the Steam deb. If this is a deb issue, then open an issue in Valve's repository instead: https://github.com/ValveSoftware/steam-for-linux. If you don't know or don't use the deb version of Steam, leave this unchecked.
-    options:
-    - label: This is a Steam Snap-specific issue
-      required: false
 - type: textarea
   attributes:
     label: Current Behavior
